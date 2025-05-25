@@ -1,0 +1,6 @@
+<web-app>
+  <display-name>SampleWebApp</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>
