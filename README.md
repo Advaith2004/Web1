@@ -95,3 +95,39 @@ resource "aws_s3_bucket_object" "text_file"{
     key="sample1.txt"
     source="./sample1.txt"
 }
+
+
+4.
+**deployment.yaml**
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw-deployment
+spec:
+  replicas: 2  
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hw-container
+        image: chethanaravi/app1-k8s:latest
+        ports:
+        - containerPort: 5000
+
+  **service.yaml**
+  apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world
+spec:
+  type: NodePort    
+  selector:
+    app: hello-world
+  ports:
+    - port: 5000        
+      targetPort: 5000
