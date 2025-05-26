@@ -68,3 +68,30 @@ depends_on:
 networks:
 app-network:
 driver: bridge
+
+
+
+
+5.
+provider "aws" {
+    region="us-west-2"
+}
+resource "aws_instance" "ec2_machine" {
+    ami="ami-07b0c09aab6e66ee9"
+    instance_type="t2.micro"
+    count=1
+    tags={
+        name="terra EC2"
+    }
+}
+resource "aws_s3_bucket" "demo_bucket" {
+    bucket="my-demo-bucket-1d22cs006-dsce-cse"
+    tags={
+        Name="upload-demo"
+    }
+}
+resource "aws_s3_bucket_object" "text_file"{
+    bucket=aws_s3_bucket.demo_bucket.bucket
+    key="sample1.txt"
+    source="./sample1.txt"
+}
