@@ -72,7 +72,8 @@ driver: bridge
 
 
 
-5.
+5.  
+
 provider "aws" {
     region="us-west-2"
 }
